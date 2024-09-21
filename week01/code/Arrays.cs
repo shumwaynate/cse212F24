@@ -12,8 +12,14 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
-
-        return []; // replace this return statement with your own
+        
+        
+        var multiples = new double[length];//create array length of abount of numbers wanted
+        for(int i = 0; i< length; i++){//DO A loop equal to number length
+            multiples[i] = number * (i + 1);//each loop set number index to number * iteration of loop
+            Console.WriteLine(multiples);
+        }
+        return multiples; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +35,19 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+    
+        amount = amount % data.Count;// first modulo amount by number of items in list to account for full cycles
+        
+        var movingNums = data.GetRange(data.Count-amount , amount); // get the last 'amount' of elements and store them
+        
+        data.InsertRange(0, movingNums); // after add those numbers at the end of list
+    
+        // Step 5: Remove the last 'amount' of elements from the list (which are now duplicated at the start)
+        data.RemoveRange(data.Count - amount, amount);// lastly remove the items that were copied from the front of the list
+        
+        Console.WriteLine("Data List = "+ data); // print for fun
+
+
     }
 }
