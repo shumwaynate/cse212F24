@@ -16,7 +16,16 @@ public class CustomerService {
         Console.WriteLine("Test 1");
 
         // Defect(s) Found: 
+        var cs1 = new CustomerService(10);
+        Console.WriteLine(cs1);
 
+        var cs2 = new CustomerService(-3);
+        Console.WriteLine(cs2);
+
+        var cs3 = new CustomerService(15);
+        Console.WriteLine(cs3);
+
+        
         Console.WriteLine("=================");
 
         // Test 2
@@ -25,6 +34,11 @@ public class CustomerService {
         Console.WriteLine("Test 2");
 
         // Defect(s) Found: 
+    
+        var service = new CustomerService(4);
+        service.AddNewCustomer();
+        service.AddNewCustomer();
+        service.ServeCustomer();
 
         Console.WriteLine("=================");
 
@@ -88,8 +102,9 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
+        //if there are customers
         var customer = _queue[0];
+        _queue.RemoveAt(0);
         Console.WriteLine(customer);
     }
 
