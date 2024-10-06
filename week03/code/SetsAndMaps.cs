@@ -21,8 +21,23 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        var unique = new HashSet<string>(words.Length); //create string to hold a set of sets given that are unique to be checked against
+        var pairs = new HashSet<string>(words.Length); //create string to hold the sets of matched sets
+
+        for (int i = 0; i < words.Length; ++i) {//run through each of the "words" given
+            string letter1 = words[i][0].ToString(); //get the first letter of the word we are on
+            string letter2 = words[i][1].ToString(); //gets second letter of word we are on
+            string pair = letter1 + letter2; //gets the 'word' we are on for quicker calls
+            string pairReverse = letter2 + letter1; //gets the opposite of 'word' we are on
+
+            if(unique.Contains(pairReverse)){ //If the unique list has a word that is the opposite of one we are on
+                pairs.Add($"{pair}&{pairReverse}"); //add the paire to the return unique pairs.
+            }else{//If the word doesn'e have a matching pair
+                unique.Add(pair);//add word to unique to be compared to next words
+            }
+        }
+        
+        return pairs.ToArray(); //return the pair hashset just as a normal array of strings as requested
     }
 
     /// <summary>
@@ -39,13 +54,20 @@ public static class SetsAndMaps
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
         var degrees = new Dictionary<string, int>();
-        foreach (var line in File.ReadLines(filename))
+        foreach (var line in File.ReadLines(filename)) //go line by line
         {
-            var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            var fields = line.Split(","); //split items into list of string
+
+
+            if(degrees.ContainsKey(fields[3])){//checks if the column 4 degree type is in dictionary already
+                var currentCount = degrees[fields[3]]; //gets the amount of degree counts in dictionary
+                degrees[fields[3]] = currentCount + 1; //add one to the amount of people with degree
+            }else{ //if not in dictionary
+                degrees.Add(fields[3], 1); //add the degree into the dictionary
+            }
         }
 
-        return degrees;
+        return degrees; //return dictionary
     }
 
     /// <summary>
@@ -66,9 +88,23 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // Remove spaces and convert to lowercase
+        var cleanedWord1 = word1.Replace(" ", "").ToLower();
+        var cleanedWord2 = word2.Replace(" ", "").ToLower();
+
+        // Anagrams must have the same length
+        if (cleanedWord1.Length != cleanedWord2.Length)
+            return false;
+
+        // Sort characters of both words
+        var sortedWord1 = cleanedWord1.OrderBy(c => c);
+        var sortedWord2 = cleanedWord2.OrderBy(c => c);
+
+        // Compare sorted characters
+        bool areAnagrams = sortedWord1.SequenceEqual(sortedWord2);
+        return areAnagrams;
     }
+
 
     /// <summary>
     /// This function will read JSON (Javascript Object Notation) data from the 

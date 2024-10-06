@@ -1,4 +1,6 @@
-﻿public static class UniqueLetters {
+﻿using System.Security.Cryptography;
+
+public static class UniqueLetters {
     public static void Run() {
         var test1 = "abcdefghjiklmnopqrstuvwxyz"; // Expect True because all letters unique
         Console.WriteLine(AreUniqueLetters(test1));
@@ -15,14 +17,31 @@
     /// <returns>true if all letters are unique, otherwise false</returns>
     private static bool AreUniqueLetters(string text) {
         // TODO Problem 1 - Replace the O(n^2) algorithm to use sets and O(n) efficiency
-        for (var i = 0; i < text.Length; ++i) {
-            for (var j = 0; j < text.Length; ++j) {
-                // Don't want to compare to yourself ... that will always result in a match
-                if (i != j && text[i] == text[j])
-                    return false;
-            }
-        }
 
+        //sets have length
+        //for each item put in set 
+        //contains.key
+        var unique = new HashSet<char>(text.Length);
+
+        for (var i = 0; i < text.Length; ++i) {
+            if(unique.Contains(text[i])){
+                return false;
+            }
+            unique.Add(text[i]);
+        }
         return true;
+
+
+
+    //     for (var i = 0; i < text.Length; ++i) {
+    //         for (var j = 0; j < text.Length; ++j) {
+    //             // Don't want to compare to yourself ... that will always result in a match
+    //             if (i != j && text[i] == text[j])
+    //                 return false;
+    //         }
+    //     }
+
+    //     return true;
     }
+
 }

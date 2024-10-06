@@ -32,7 +32,26 @@ public class Maze
     /// </summary>
     public void MoveLeft()
     {
-        // FILL IN CODE
+        // Get the current position
+        var currentPosition = (_currX, _currY);
+
+        // Check if the current position exists in the maze map
+        if (!_mazeMap.ContainsKey(currentPosition))
+        {
+            throw new InvalidOperationException("Current position is out of bounds.");
+        }
+
+        // Get the valid directions for the current position
+        var directions = _mazeMap[currentPosition];
+
+        // Check if we can move left (index 0 corresponds to left)
+        if (!directions[0]) // directions[0] is for left
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        // Move left: decrement currX
+        _currX -= 1;
     }
 
     /// <summary>
@@ -41,7 +60,26 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        // Get the current position
+        var currentPosition = (_currX, _currY);
+
+        // Check if the current position exists in the maze map
+        if (!_mazeMap.ContainsKey(currentPosition))
+        {
+            throw new InvalidOperationException("Current position is out of bounds.");
+        }
+
+        // Get the valid directions for the current position
+        var directions = _mazeMap[currentPosition];
+
+        // Check if we can move left (index 0 corresponds to left)
+        if (!directions[1]) // directions[1] is for right
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        // Move right: increment currX
+        _currX += 1;
     }
 
     /// <summary>
@@ -50,7 +88,26 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
-        // FILL IN CODE
+        // Get the current position
+        var currentPosition = (_currX, _currY);
+
+        // Check if the current position exists in the maze map
+        if (!_mazeMap.ContainsKey(currentPosition))
+        {
+            throw new InvalidOperationException("Current position is out of bounds.");
+        }
+
+        // Get the valid directions for the current position
+        var directions = _mazeMap[currentPosition];
+
+        // Check if we can move left (index 0 corresponds to left)
+        if (!directions[2]) // directions[2] is for up
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        // Move up: decrement currY
+        _currY -= 1;
     }
 
     /// <summary>
@@ -59,7 +116,26 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        // Get the current position
+        var currentPosition = (_currX, _currY);
+
+        // Check if the current position exists in the maze map
+        if (!_mazeMap.ContainsKey(currentPosition))
+        {
+            throw new InvalidOperationException("Current position is out of bounds.");
+        }
+
+        // Get the valid directions for the current position
+        var directions = _mazeMap[currentPosition];
+
+        // Check if we can move left (index 0 corresponds to left)
+        if (!directions[3]) // directions[3] is for down
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        // Move Down: decrement currY
+        _currY += 1;
     }
 
     public string GetStatus()
