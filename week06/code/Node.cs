@@ -9,11 +9,11 @@ public class Node
         this.Data = data;
     }
 
-    public void Insert(int value)
+    public void Insert(int value) // node = {value , Left , Right}
     {
         // TODO Start Problem 1
 
-        if (value < Data)
+        if (value < Data) //less than
         {
             // Insert to the left
             if (Left is null)
@@ -21,25 +21,53 @@ public class Node
             else
                 Left.Insert(value);
         }
-        else
+        else if(value > Data)// greater than
         {
             // Insert to the right
             if (Right is null)
                 Right = new Node(value);
             else
                 Right.Insert(value);
+        }else{ //if equal to
+            //nothing
         }
+
     }
 
-    public bool Contains(int value)
+    public bool Contains(int value)// node = {value , Left , Right}
     {
-        // TODO Start Problem 2
-        return false;
+        if (value < Data) //less than
+        {
+            // check to the left
+            if (Left is null)
+                return false;
+            else
+                return Left.Contains(value);
+        }
+        else if(value > Data)// greater than
+        {
+            // cheeck to the right
+            if (Right is null)
+                return false;
+            else
+                return Right.Contains(value);
+        }else{ //if equal to
+            return true;
+        }
+        
     }
 
-    public int GetHeight()
+    public int GetHeight() // first call start at 0
     {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        
+        var leftCount = Left?.GetHeight() ?? 0; //if left exists get that value, otherwise 0
+        var rightCount = Right?.GetHeight() ?? 0; //if right exists get that value, otherwise 0
+
+        if (leftCount <= rightCount){// when counts on both sides the same or right is bigger
+            return rightCount + 1; //count current node and amount on right and return
+        }else{ //when count on left is bigger
+            return leftCount + 1;
+        }
+
     }
 }
